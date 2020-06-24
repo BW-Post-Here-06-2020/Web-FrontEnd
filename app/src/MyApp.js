@@ -10,20 +10,29 @@ import PrivateRoute from "./components/myComponents/PrivateRoute";
 import CreateAccountForm from "./components/myComponents/CreateAccountForm";
 import Dashboard from "./components/myComponents/Dashboard";
 
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import { INITIAL_STATE, reducer } from "./components/store/reducers/reducer";
+
+
+const store = createStore( reducer, INITIAL_STATE );
+
 export default () => 
 {
   useEffect( () => { M.AutoInit() }, [] );
   return (
-    <BrowserRouter> 
-      <NavigationBar />
-
-      
-      <Switch>
-        <Route exact path = "/" component = { LoginForm } />
-        <Route path = "/createAccount" component = { CreateAccountForm } />
-        <PrivateRoute path = "/dashboard" component = { Dashboard } />
-        <div>404</div>
-      </Switch>
-    </BrowserRouter>
+    <Provider store = { store } >
+      <BrowserRouter> 
+        <NavigationBar />
+        <Switch>
+          <Route exact path = "/" component = { LoginForm } />
+          <Route path = "/createAccount" component = { CreateAccountForm } />
+          <PrivateRoute path = "/dashboard" component = { Dashboard } />
+          <Route>
+            404
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </Provider>
   );
 }

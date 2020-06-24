@@ -18,3 +18,20 @@
 {
   margin-top: -20px;
 }
+.card-content
+{
+  border : 1px solid  #311b92;
+}
+
+.myPost
+{
+  color: #311b92  !important;
+}
+
+.top
+{
+  position : absolute;
+  top : 23px;
+  left : 93%;
+  font-size: 1.7rem;
+}

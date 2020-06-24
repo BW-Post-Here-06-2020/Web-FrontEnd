@@ -15,6 +15,7 @@ export default function LoginForm()
   {
     e.preventDefault();
     console.log( "Values =>", user );
+    history.push( "/" );
     // axiosWithAuth().post( "/api/createAccount", user )
     //   .then( response => 
     //     {

@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 
 export default function NavigationBar() 
 {
+  const logOutOnClick = e =>
+  {
+    if( localStorage.getItem( "token" ) )
+      localStorage.removeItem( "token" );
+  }
+
   return (
     <Fragment>
       <nav>
@@ -13,7 +19,7 @@ export default function NavigationBar()
 
             <ul className = "right hide-on-med-and-down">
               <li><Link to = "/ViewPosts">View Posts</Link></li>
-              <li><Link to = "/">Logout</Link></li>
+              <li><Link to = "/" onClick = { logOutOnClick }>Logout</Link></li>
             </ul>
           </div>
         </div>
@@ -21,7 +27,7 @@ export default function NavigationBar()
 
       <ul className = "sidenav" id="mobile-demo">
         <li><Link to = "/ViewPosts">View Posts</Link></li>
-        <li><Link to = "/">Logout</Link></li>
+        <li><Link to = "/" onClick = { logOutOnClick }>Logout</Link></li>
       </ul>
     </Fragment>
   );

@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+import M from "materialize-css/dist/js/materialize.min.js";
+
 function ComponentName( props )
 {
+
+  useEffect( () => { M.AutoInit() }, [] );
+
   const dispatch = useDispatch();
 
   const [ post, setPost ] = useState( { id : props.id, title : props.post.title, post : props.post.post } );
@@ -38,9 +43,7 @@ function ComponentName( props )
             <br/>
             <div style = { { display : "flex", justifyContent : "center" } }>
               <a className = "waves-effect waves-light btn deep-purple darken-4 modal-trigger" href = { `#editForm${ post.id }` }>Edit Post</a>
-
-
-              <div id = { `#editForm${ post.id }` } className ="modal">
+              <div id = { `editForm${ post.id }` } className ="modal">
                 <div className ="modal-content">
                   <div className = "row">
                     <div className="input-field center offset-s3 col s7">
@@ -55,14 +58,9 @@ function ComponentName( props )
                 </div> 
                   
                 <div className ="modal-footer">
-                  <a href = "#!" className="waves-effect waves-light btn-small deep-purple darken-4" onClick = { editPost }>Done</a>
+                  <a href = "#!" className="modal-close waves-effect waves-light btn-small deep-purple darken-4" onClick = { editPost }>Done</a>
                 </div>
               </div>
-
-              
-              <h3>{ post.id } </h3>
-
-
             </div>
           </div>
       </div>

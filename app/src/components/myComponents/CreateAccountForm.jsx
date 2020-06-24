@@ -14,7 +14,6 @@ export default function LoginForm()
   const onSubmit = e =>
   {
     e.preventDefault();
-    console.log( "Values =>", user );
     history.push( "/" );
     // axiosWithAuth().post( "/api/createAccount", user )
     //   .then( response => 
@@ -36,18 +35,25 @@ export default function LoginForm()
     <div className = "container" style = { { marginTop : "130px" } } >
       <form className = "col s10" onSubmit = { onSubmit }>
         <div className="row">
+
+        <div className="input-field center offset-s3 col s7">
+            <p className = "login">Join Us!</p>
+          </div>
           
           <div className="input-field center offset-s3 col s7">
+            <i className = "material-icons prefix icon">account_circle</i>
             <input id="username" type="text" name = "username" value = { user.username } onChange = { onChange } />
             <label htmlFor = "username">Username</label>
           </div>
 
           <div className="input-field center offset-s3 col s7">
+            <i className = "material-icons prefix icon">email</i>
             <input id="email" type="email" name = "email" value = { user.email } onChange = { onChange } />
             <label htmlFor = "password">Email</label>
           </div>
 
           <div className="input-field center offset-s3 col s7">
+            <i className = "material-icons prefix icon">lock</i>
             <input id="password" type="password" name = "password" value = { user.password } onChange = { onChange } />
             <label htmlFor = "password">Password</label>
           </div>

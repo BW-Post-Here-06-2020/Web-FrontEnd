@@ -14,7 +14,7 @@ export default function Dashboard()
         axiosWithAuth().get( "https://pokeapi.co/api/v2/pokemon" )
           .then( response => 
             {
-              console.log( response );
+              //console.log( response );
               dispatch( { type : "FETCH FOR ITEMS", payload : "NEED RESPONSE DATA HERE" } );
             } )
           .catch( error => console.log( "ERROR FETCHING" ) );

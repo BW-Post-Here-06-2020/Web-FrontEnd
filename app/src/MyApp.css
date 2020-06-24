@@ -52,3 +52,30 @@
 {
   font-size: 4rem;
 }
+
+.icon
+{
+  color: #311b92;
+  font-size: 44.8rem;
+}
+
+.login
+{
+  color: #311b92;
+  font-size: 2.5rem;
+}
+
+textarea
+{
+  height : 200px !important;
+}
+textarea:focus { 
+  outline: none !important;
+  border-color: #311b92;
+  box-shadow: 0 0 10px #311b92;
+}
+
+.modal
+{
+  /* height : 1800px !important; */
+}

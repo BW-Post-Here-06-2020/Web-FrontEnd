@@ -54,9 +54,9 @@ export function reducer( state = INITIAL_STATE, action )
   switch( action.type )
   {
     case "FETCH_POSTS":
-      return { ...state, savedPosts : action.payload }
+      //return { ...state, savedPosts : action.payload }
     case "DELETE_POST":
-      return { ...state, savedPosts : [ state.savedPosts.filter( post => post.id != action.payload )  ] }
+      //return { ...state, savedPosts : [ state.savedPosts.filter( post => post.id != action.payload )  ] }
     default:
       return state;
   }

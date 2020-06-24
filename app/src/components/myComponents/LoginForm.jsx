@@ -18,7 +18,6 @@ export default function LoginForm()
   const onSubmit = e =>
   {
     e.preventDefault();
-    console.log( "User =>", user );
     // axiosWithAuth().post( "/api/login", user )
     //   .then( response => 
     //     {
@@ -39,7 +38,6 @@ export default function LoginForm()
   const createAccount = e =>
   {
     e.preventDefault();
-    console.log( "Hello" );
     history.push( "/createAccount" );
   }
 
@@ -49,11 +47,17 @@ export default function LoginForm()
         <div className="row">
           
           <div className="input-field center offset-s3 col s7">
+            <p className = "login">SubReddit Login</p>
+          </div>
+
+          <div className="input-field center offset-s3 col s7">
+            <i className = "material-icons prefix icon">account_circle</i>
             <input id="username" type="text" name = "username" value = { user.username } onChange = { onChange } />
             <label htmlFor = "username">Username</label>
           </div>
 
           <div className="input-field center offset-s3 col s7">
+            <i className ="material-icons prefix icon">lock</i>
             <input id="password" type="password" name = "password" value = { user.password } onChange = { onChange } />
             <label htmlFor = "password">Password</label>
             <a className = "right deep-purple-text" href="#">Forgot Password?</a>

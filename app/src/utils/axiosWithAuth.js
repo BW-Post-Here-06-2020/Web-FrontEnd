@@ -7,5 +7,5 @@ export const axiosWithAuth = () =>
         ? window.localStorage.getItem("token")
         : "",
     },
-    baseURL: "http://localhost:5000",
+    baseURL: "https://api04.herokuapp.com",
   });

@@ -1,4 +1,4 @@
-import { FETCH_DATA, UPDATE_DATA, SET_ERROR } from "../actions/index";
+import { FETCH_DATA, UPDATE_DATA, SET_ERROR } from "../actions/postActions";
 
 const initialState = {
   dataArray: [],
@@ -6,7 +6,7 @@ const initialState = {
   error: "",
 };
 
-export const Reducer = (state = initialState, action) => {
+export const postReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_DATA:
       return {

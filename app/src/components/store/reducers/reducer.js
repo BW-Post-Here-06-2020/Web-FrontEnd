@@ -2,6 +2,7 @@
 
 export const INITIAL_STATE = 
 {
+  signIn : false,
   savedPosts : 
   [ 
     {
@@ -53,6 +54,12 @@ export function reducer( state = INITIAL_STATE, action )
   
   switch( action.type )
   {
+    case "SIGN_IN":
+      const x = { ...state, signIn : true };
+      console.log( x );
+      return { ...state, signIn : true };
+    case "SIGN_OUT":
+      return { ...state, signIn : false };
     case "FETCH_POSTS":
       //return { ...state, savedPosts : action.payload }
     case "DELETE_POST":

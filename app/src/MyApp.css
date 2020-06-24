@@ -35,3 +35,20 @@
   left : 93%;
   font-size: 1.7rem;
 }
+
+.notFoundPage
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+.notFoundPage h1
+{
+  font-size: 18rem;
+}
+
+.notFoundPage p
+{
+  font-size: 4rem;
+}

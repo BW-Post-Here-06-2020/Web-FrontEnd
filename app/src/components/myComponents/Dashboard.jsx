@@ -1,12 +1,26 @@
-import React from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from 'react';
+import { useDispatch } from "react-redux";
 import MyPosts from "./MyPosts";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 export default function Dashboard() 
 {
-  const posts = useSelector( state => state.savedPosts );
+  const dispatch = useDispatch();
 
-  console.log( posts );
+  useEffect( () => 
+  {
+    dispatch( dispatch =>
+      {
+        axiosWithAuth().get( "https://pokeapi.co/api/v2/pokemon" )
+          .then( response => 
+            {
+              console.log( response );
+              dispatch( { type : "FETCH FOR ITEMS", payload : "NEED RESPONSE DATA HERE" } );
+            } )
+          .catch( error => console.log( "ERROR FETCHING" ) );
+      } );
+  }, [] );
+
   return (
     <div className = "container">
       <MyPosts />

@@ -85,7 +85,7 @@
 
 
 import React from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import MyPost from "./MyPost";
 
 export default function MyPosts() 
@@ -95,7 +95,7 @@ export default function MyPosts()
     <div>
       <div className="center myPost"><h2>My Posts</h2></div>
       <div className = "myPosts row">
-        { savePosts.map( ( post, index ) => <MyPost key = { index } id = { 0 }  title = { post.title } post = { post.post } /> ) }
+        { savePosts.length > 0 ? savePosts.map( ( post, index ) => <MyPost key = { index } id = { 0 }  title = { post.title } post = { post.post } /> ) : <p>None</p> }
       </div>
     </div>
   )

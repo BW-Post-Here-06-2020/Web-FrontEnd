@@ -10,16 +10,19 @@ import PrivateRoute from "./components/myComponents/PrivateRoute";
 import CreateAccountForm from "./components/myComponents/CreateAccountForm";
 import Dashboard from "./components/myComponents/Dashboard";
 
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import { INITIAL_STATE, reducer } from "./components/store/reducers/reducer";
+import { reducer } from "./components/store/reducers/reducer";
+import thunk from "redux-thunk";
+import NotFound from "./components/myComponents/NotFound";
 
 
-const store = createStore( reducer, INITIAL_STATE );
+const store = createStore( reducer, applyMiddleware( thunk ) );
 
 export default () => 
 {
   useEffect( () => { M.AutoInit() }, [] );
+
   return (
     <Provider store = { store } >
       <BrowserRouter> 
@@ -28,9 +31,7 @@ export default () =>
           <Route exact path = "/" component = { LoginForm } />
           <Route path = "/createAccount" component = { CreateAccountForm } />
           <PrivateRoute path = "/dashboard" component = { Dashboard } />
-          <Route>
-            404
-          </Route>
+          <Route component = { NotFound }/>
         </Switch>
       </BrowserRouter>
     </Provider>

@@ -5,14 +5,24 @@ import PrivateRoute from "./components/PrivateRoute";
 import Home from "./components/Home";
 import Dashboard from "./components/Dashboard";
 import ButtonAppBar from "./components/NavBar/ButtonAppBar";
+import { useSelector } from "react-redux";
 
 function App() {
+  const token = useSelector((state) => state.userReducer.token);
+
+  console.log("App -> token", token);
+
   return (
     <div>
       <ButtonAppBar />
       <Switch>
-        <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/" component={Home} />
+        {token ? (
+          <PrivateRoute exact path="/" component={Dashboard} />
+        ) : (
+          <Route exact path="/" component={Home} />
+        )}
+        {/* <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/" component={Home} /> */}
         <Route exact path="/login" component={Login} />
       </Switch>
     </div>

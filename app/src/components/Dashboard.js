@@ -32,7 +32,6 @@ const useStyles = makeStyles({
 
 const Dashboard = () => {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
 
   const dispatch = useDispatch();
 
@@ -57,18 +56,17 @@ const Dashboard = () => {
                     color="textSecondary"
                     gutterBottom
                   >
-                    Word of the Day
+                    User Name Goes Here
                   </Typography>
                   <Typography variant="h5" component="h2">
-                    be{bull}nev{bull}o{bull}lent
+                    {item.title}
                   </Typography>
-                  <Typography className={classes.pos} color="textSecondary">
+                  {/* <Typography className={classes.pos} color="textSecondary">
                     adjective
-                  </Typography>
+                  </Typography> */}
+                  <p></p>
                   <Typography variant="body2" component="p">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
+                    {item.post}
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -79,7 +77,7 @@ const Dashboard = () => {
           ))}
         </div>
       ) : (
-        <p>You need to add some data</p>
+        <p>There is nothing to display</p>
       )}
     </div>
   );

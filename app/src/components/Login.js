@@ -85,14 +85,14 @@ const Login = () => {
     e.preventDefault();
     dispatch(loginUser(formValues));
     // setFormValues(initialFormValues);
-    push("/dashboard");
+    push("/");
   };
 
   const createAccount = (e) => {
     e.preventDefault();
     dispatch(registerUser(formValues));
     // setFormValues(initialFormValues);
-    push("/dashboard");
+    push("/");
   };
 
   return (

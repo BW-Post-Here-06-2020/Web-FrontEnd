@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 // const PrivateRoute = ({ component: Component, ...rest }) => (
 //   <Route
 //     {...rest}
@@ -16,7 +17,7 @@ import { Route, Redirect } from "react-router-dom";
 // export default PrivateRoute;
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const token = window.localStorage.getItem("token");
+  const token = useSelector((state) => state.userReducer.token);
   return (
     <Route
       {...rest}

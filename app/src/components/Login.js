@@ -91,14 +91,15 @@ const Login = () => {
 
   const login = ( event ) => {
     event.preventDefault();
-    axiosWithAuth()
-      .post( "api/login" , formValues.credentials )
-      .then( ( res )  => {
-        console.log("Login -> res", res);
-        window.localStorage.setItem( "token", res.data.payload );
-        push( "/PostHere" );
-      })
-      .catch( ( err ) => console.log( err ) );
+    push( "/Posts" );
+    // axiosWithAuth()
+    //   .post( "api/login" , formValues.credentials )
+    //   .then( ( res )  => {
+    //     console.log("Login -> res", res);
+    //     window.localStorage.setItem( "token", res.data.payload );
+    //     push( "/PostHere" );
+    //   })
+    //   .catch( ( err ) => console.log( err ) );
   };
 
   const createAccount = e => 
@@ -202,9 +203,6 @@ const Login = () => {
       <Box mt={8}>
         <Copyright />
       </Box>
-
-     
-
 
     </Container>
   );

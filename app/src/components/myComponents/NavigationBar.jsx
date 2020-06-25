@@ -60,7 +60,7 @@ export default function NavigationBar() {
           <li>
             <div className="user-view">
               <div className="background">
-                <img src={require("../images/background.jpg")} />
+                <img src={require("../images/background.jpg")} alt="Profile" />
               </div>
               <Link to="my-account">
                 <i className="medium white-text material-icons">account_circle</i>

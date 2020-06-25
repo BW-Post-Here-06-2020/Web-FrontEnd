@@ -26,7 +26,7 @@ export default function LoginForm() {
         })
         setUser({ username: "", password: "" })
         dispatch({ type: "SIGN_IN", payload: response.data.user })
-        history.push("/dashboard")
+        history.push("/create-post")
       })
       .catch(error =>
         M.toast({
@@ -59,7 +59,7 @@ export default function LoginForm() {
             <i className="material-icons prefix icon">lock</i>
             <input id="password" type="password" name="password" value={user.password} onChange={onChange} />
             <label htmlFor="password">Password</label>
-            <a className="right deep-purple-text" href="#">
+            <a href="!#" className="right deep-purple-text">
               Forgot Password?
             </a>
           </div>
@@ -72,7 +72,7 @@ export default function LoginForm() {
           </div>
 
           <div className="row center lessMargin">
-            <a className="deep-purple-text center offset-s1 col s11" onClick={createAccount}>
+            <a href="!#" className="deep-purple-text center offset-s1 col s11" onClick={createAccount}>
               Create User Account!
             </a>
           </div>

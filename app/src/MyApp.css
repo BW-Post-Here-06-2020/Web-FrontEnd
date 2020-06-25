@@ -1,81 +1,67 @@
-.input-field input:focus + label 
-{
-  color: #311b92  !important;
+.input-field input:focus + label {
+  color: #311b92 !important;
 }
 
-.row .input-field input:focus 
-{
-  border-bottom: 1px solid #311b92  !important;
-  box-shadow: 0 1px 0 0 #311b92  !important
+.row .input-field input:focus {
+  border-bottom: 1px solid #311b92 !important;
+  box-shadow: 0 1px 0 0 #311b92 !important;
 }
 
-.wider
-{
-  width : 50%;
+.wider {
+  width: 50%;
 }
 
-.lessMargin
-{
+.lessMargin {
   margin-top: -20px;
 }
-.card-content
-{
-  border : 1px solid  #311b92;
+.card-content {
+  border: 1px solid #311b92;
 }
 
-.myPost
-{
-  color: #311b92  !important;
+.myPost {
+  color: #311b92 !important;
 }
 
-.top
-{
-  position : absolute;
-  top : 23px;
-  left : 93%;
+.top {
+  position: absolute;
+  top: 23px;
+  left: 93%;
   font-size: 1.7rem;
 }
 
-.notFoundPage
-{
+.notFoundPage {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
 }
 
-.notFoundPage h1
-{
+.notFoundPage h1 {
   font-size: 18rem;
 }
 
-.notFoundPage p
-{
+.notFoundPage p {
   font-size: 4rem;
 }
 
-.icon
-{
+.icon {
   color: #311b92;
   font-size: 44.8rem;
 }
 
-.login
-{
+.login {
   color: #311b92;
   font-size: 2.5rem;
 }
 
-textarea
-{
-  height : 200px !important;
+textarea {
+  height: 200px !important;
 }
-textarea:focus { 
+textarea:focus {
   outline: none !important;
   border-color: #311b92;
   box-shadow: 0 0 10px #311b92;
 }
 
-.modal
-{
-  /* height : 1800px !important; */
+.margin {
+  margin-right: 40px;
 }

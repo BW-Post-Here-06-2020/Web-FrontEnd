@@ -1,28 +1,37 @@
 import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { axiosWithAuth } from "../../utils/axiosWithAuth"
+import { useHistory } from "react-router-dom"
+import M from "materialize-css/dist/js/materialize.min.js"
 
 export default function UpdateUser() {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
   const [myUser, setMyUser] = useState({ username: user.username, password: "", new_password: "", phone: user.phone })
+  const history = useHistory()
 
   const onSubmit = e => {
     e.preventDefault()
-    console.log(myUser)
 
     dispatch(dispatch => {
       axiosWithAuth()
         .put(`/${user.id}`, myUser)
         .then(response => {
-          console.log("Updated", response)
           dispatch({
             type: "UPDATE_USER",
             payload: response.data.updatedUser,
           })
+          M.toast({
+            html: `Account Updated!`,
+            classes: "deep-purple darken-4",
+          })
+          history.push("/create-post")
         })
         .catch(error => {
-          console.log("ERROR FETCHING")
+          M.toast({
+            html: `Check Password`,
+            classes: "deep-purple darken-4",
+          })
         })
     })
   }
@@ -31,7 +40,7 @@ export default function UpdateUser() {
   }
 
   return (
-    <div className="container" style={{ marginTop: "130px" }}>
+    <div className="container">
       <form className="col s10" onSubmit={onSubmit}>
         <div className="row">
           <div className="input-field center offset-s3 col s7">
@@ -77,7 +86,7 @@ export default function UpdateUser() {
 
         <div className="row">
           <div className="input-field offset-s4 col s10">
-            <button className="waves-effect wider waves-light btn-small deep-purple darken-4">Login</button>
+            <button className="waves-effect wider waves-light btn-small deep-purple darken-4">Update Information</button>
             <br />
           </div>
         </div>

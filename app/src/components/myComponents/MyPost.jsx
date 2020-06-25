@@ -20,7 +20,9 @@ function ComponentName(props) {
     setPost({ ...post, [e.target.name]: e.target.value })
   }
 
-  const deletePost = () => {}
+  const deletePost = () => {
+    dispatch({ type: "DELETE_POST", payload: post.title })
+  }
 
   const editPost = e => {}
 
@@ -37,7 +39,23 @@ function ComponentName(props) {
           <span className="card-title"> {post.title}</span>
           <p>{post.post}</p>
           <br />
+
+          <ul id="dropdown1" className="dropdown-content">
+            {props.post.prediction.map((prediction, index) => (
+              <li key={index} className="collection-item">
+                {prediction}
+              </li>
+            ))}
+          </ul>
+
+          <br />
           <div style={{ display: "flex", justifyContent: "center" }}>
+            <a
+              href="!#"
+              className="dropdown-trigger waves-effect waves-light btn deep-purple darken-4 margin"
+              data-target="dropdown1">
+              Predictions
+            </a>
             <a className="waves-effect waves-light btn deep-purple darken-4 modal-trigger" href={`#editForm${post.id}`}>
               Edit Post
             </a>

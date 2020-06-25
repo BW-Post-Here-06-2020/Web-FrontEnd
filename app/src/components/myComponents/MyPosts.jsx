@@ -1,9 +1,9 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import MyPost from "./MyPost";
+import React from "react"
+import { useSelector } from "react-redux"
+import MyPost from "./MyPost"
 
 export default function MyPosts() {
-  const savePosts = useSelector((state) => state.savedPosts);
+  const savePosts = useSelector(state => state.savedPosts)
   return (
     <div>
       <div className="center myPost">
@@ -11,13 +11,13 @@ export default function MyPosts() {
       </div>
       <div className="myPosts row">
         {savePosts.length > 0 ? (
-          savePosts.map((post, index) => (
-            <MyPost key={index} id={index} post={post} />
-          ))
+          savePosts.map((post, index) => <MyPost key={index} id={index} post={post} />)
         ) : (
-          <p>None</p>
+          <div className="notFoundPage">
+            <p className="myPost">No Posts Saved!!!</p>
+          </div>
         )}
       </div>
     </div>
-  );
+  )
 }

@@ -1,40 +1,40 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react"
+import { useHistory } from "react-router-dom"
 
-import { axiosWithAuth } from "../../utils/axiosWithAuth";
-import M from "materialize-css/dist/js/materialize.min.js";
+import { axiosWithAuth } from "../../utils/axiosWithAuth"
+import M from "materialize-css/dist/js/materialize.min.js"
 
 export default function LoginForm() {
-  let history = useHistory();
+  let history = useHistory()
 
-  const [user, setUser] = useState({ username: "", phone: "", password: "" });
+  const [user, setUser] = useState({ username: "", phone: "", password: "" })
 
-  const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value })
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = e => {
+    e.preventDefault()
     axiosWithAuth()
       .post("/register", user)
-      .then((response) => {
+      .then(response => {
         M.toast({
           html: `Account Created Successfully`,
           classes: "deep-purple darken-4",
-        });
-        setUser({ username: "", phone: "", password: "" });
-        history.push("/");
+        })
+        setUser({ username: "", phone: "", password: "" })
+        history.push("/")
       })
-      .catch((error) =>
+      .catch(error =>
         M.toast({
           html: "Account Already Exists",
           classes: "deep-purple darken-4",
         })
-      );
-  };
+      )
+  }
 
-  const alreadyMember = (e) => {
-    e.preventDefault();
-    history.push("/");
-  };
+  const alreadyMember = e => {
+    e.preventDefault()
+    history.push("/")
+  }
 
   return (
     <div className="container" style={{ marginTop: "130px" }}>
@@ -46,59 +46,36 @@ export default function LoginForm() {
 
           <div className="input-field center offset-s3 col s7">
             <i className="material-icons prefix icon">account_circle</i>
-            <input
-              id="username"
-              type="text"
-              name="username"
-              value={user.username}
-              onChange={onChange}
-            />
+            <input id="username" type="text" name="username" value={user.username} onChange={onChange} />
             <label htmlFor="username">Username</label>
           </div>
 
           <div className="input-field center offset-s3 col s7">
             <i className="material-icons prefix icon">phone</i>
-            <input
-              id="phone"
-              type="text"
-              name="phone"
-              value={user.phone}
-              onChange={onChange}
-            />
+            <input id="phone" type="text" name="phone" value={user.phone} onChange={onChange} />
             <label htmlFor="password">Phone Number</label>
           </div>
 
           <div className="input-field center offset-s3 col s7">
             <i className="material-icons prefix icon">lock</i>
-            <input
-              id="password"
-              type="password"
-              name="password"
-              value={user.password}
-              onChange={onChange}
-            />
+            <input id="password" type="password" name="password" value={user.password} onChange={onChange} />
             <label htmlFor="password">Password</label>
           </div>
 
           <div className="row">
             <div className="input-field offset-s4 col s10">
-              <button className="waves-effect wider waves-light btn-small deep-purple darken-4">
-                Create Account
-              </button>
+              <button className="waves-effect wider waves-light btn-small deep-purple darken-4">Create Account</button>
               <br />
             </div>
           </div>
 
           <div className="row center lessMargin">
-            <a
-              className="deep-purple-text center offset-s1 col s11"
-              onClick={alreadyMember}
-            >
+            <a href="!#" className="deep-purple-text center offset-s1 col s11" onClick={alreadyMember}>
               Already a Member?
             </a>
           </div>
         </div>
       </form>
     </div>
-  );
+  )
 }

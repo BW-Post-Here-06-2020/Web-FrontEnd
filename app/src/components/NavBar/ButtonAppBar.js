@@ -44,7 +44,7 @@ const ButtonAppBar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            RedditPostHere
+            A Subreddit Predictor
           </Typography>
           {token ? (
             <>

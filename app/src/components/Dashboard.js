@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDispatch } from "react-redux";
 
 import { dummyData as data } from "./DummyData";
 
 import { getData } from "../actions/postActions";
+import { getRecommendation } from "../actions/postActions";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -12,15 +13,15 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275,
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: "25ch",
+    },
   },
   title: {
     fontSize: 14,
@@ -28,23 +29,62 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
-});
+}));
+
+const initialFormValues = {
+  title: "",
+  body: "",
+};
 
 const Dashboard = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getData());
-  }, []);
+  const [formValues, setFormValues] = useState(initialFormValues);
 
-  useEffect(() => {
-    console.log(data);
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getData());
+  // }, []);
+
+  const handleChange = (event) => {
+    setFormValues({
+      ...formValues,
+      [event.target.name]: event.target.value,
+    });
+  };
 
   return (
     <div>
+      <br></br>
+      <form className={classes.root} noValidate autoComplete="off">
+        <div>
+          <TextField
+            name="title"
+            id="title"
+            type="text"
+            label="Post Title"
+            multiline
+            value={formValues.title}
+            onChange={handleChange}
+          />
+          <TextField
+            name="body"
+            id="body"
+            type="text"
+            label="Post Content"
+            multiline
+            value={formValues.body}
+            onChange={handleChange}
+          />
+          <br></br>
+          <br></br>
+          <Button onClick={() => dispatch(getRecommendation(formValues))}>
+            Get Recommendation
+          </Button>
+        </div>
+      </form>
+      <br></br>
       {data.length ? (
         <div>
           {data.map((item) => (
@@ -70,7 +110,7 @@ const Dashboard = () => {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small">Learn More</Button>
+                  <Button size="small">Remove From Favorites</Button>
                 </CardActions>
               </Card>
             </div>

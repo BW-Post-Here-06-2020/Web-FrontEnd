@@ -17,10 +17,10 @@ function App() {
       <ButtonAppBar />
       <Switch>
         {token ? (
-          <>
+          <div>
             <PrivateRoute exact path="/" component={Dashboard} />
             <PrivateRoute exact path="/profile" component={Profile} />
-          </>
+          </div>
         ) : (
           <Route exact path="/" component={Login} />
         )}

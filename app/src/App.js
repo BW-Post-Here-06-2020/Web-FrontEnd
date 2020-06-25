@@ -19,11 +19,11 @@ function App() {
         {token ? (
           <PrivateRoute exact path="/" component={Dashboard} />
         ) : (
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Login} />
+          // <Route exact path="/" component={Home} />
         )}
         {/* <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <Route exact path="/" component={Home} /> */}
-        <Route exact path="/login" component={Login} />
       </Switch>
     </div>
   );

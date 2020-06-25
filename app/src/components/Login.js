@@ -53,7 +53,14 @@ const Copyright = () => {
   );
 };
 
-const initialFormValues = {
+const initialLoginValues = {
+  username: "",
+  password: "",
+};
+
+const initialRegisterValues = {
+  first_name: "",
+  last_name: "",
   username: "",
   password: "",
   phone: "",
@@ -63,7 +70,9 @@ const Login = () => {
   const dispatch = useDispatch();
   const { push } = useHistory();
 
-  const [formValues, setFormValues] = useState(initialFormValues);
+  const [loginValues, setLoginValues] = useState(initialLoginValues);
+
+  const [registerValues, setRegisterValues] = useState(initialRegisterValues);
 
   const classes = useStyles();
 
@@ -77,22 +86,35 @@ const Login = () => {
     setOpen(false);
   };
 
-  const handleChange = (event) => {
-    setFormValues({ ...formValues, [event.target.name]: event.target.value });
+  const handleLoginChange = (event) => {
+    setLoginValues({ ...loginValues, [event.target.name]: event.target.value });
+  };
+
+  const handleRegisterChange = (event) => {
+    setRegisterValues({
+      ...registerValues,
+      [event.target.name]: event.target.value,
+    });
   };
 
   const login = (e) => {
     e.preventDefault();
-    dispatch(loginUser(formValues));
-    // setFormValues(initialFormValues);
+    dispatch(loginUser(loginValues));
+    setLoginValues(initialLoginValues);
     push("/");
   };
 
   const createAccount = (e) => {
     e.preventDefault();
-    dispatch(registerUser(formValues));
-    // setFormValues(initialFormValues);
-    push("/");
+    dispatch(registerUser(registerValues));
+    dispatch(
+      loginUser({
+        username: registerValues.username,
+        password: registerValues.password,
+      })
+    );
+    closeModalHandler();
+    setRegisterValues(initialRegisterValues);
   };
 
   return (
@@ -105,8 +127,8 @@ const Login = () => {
         </Typography>
         <form onSubmit={login} className={classes.form} noValidate>
           <TextField
-            value={formValues.username}
-            onChange={handleChange}
+            value={loginValues.username}
+            onChange={handleLoginChange}
             type="text"
             variant="outlined"
             fullWidth
@@ -120,8 +142,8 @@ const Login = () => {
           />
 
           <TextField
-            value={formValues.password}
-            onChange={handleChange}
+            value={loginValues.password}
+            onChange={handleLoginChange}
             variant="outlined"
             margin="normal"
             required
@@ -174,8 +196,35 @@ const Login = () => {
 
             <form onSubmit={createAccount} className={classes.form} noValidate>
               <TextField
-                value={formValues.username}
-                onChange={handleChange}
+                value={registerValues.first_name}
+                onChange={handleRegisterChange}
+                type="text"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="first_name"
+                label="First Name"
+                name="first_name"
+                autoComplete="first_name"
+                autoFocus
+              />
+              <TextField
+                value={registerValues.last_name}
+                onChange={handleRegisterChange}
+                type="text"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="last_name"
+                label="Last Name"
+                name="last_name"
+                autoComplete="last_name"
+              />
+              <TextField
+                value={registerValues.username}
+                onChange={handleRegisterChange}
                 type="text"
                 variant="outlined"
                 margin="normal"
@@ -185,12 +234,11 @@ const Login = () => {
                 label="Username"
                 name="username"
                 autoComplete="username"
-                autoFocus
               />
 
               <TextField
-                value={formValues.password}
-                onChange={handleChange}
+                value={registerValues.password}
+                onChange={handleRegisterChange}
                 variant="outlined"
                 margin="normal"
                 required
@@ -203,14 +251,14 @@ const Login = () => {
               />
 
               <TextField
-                value={formValues.phone}
-                onChange={handleChange}
+                value={registerValues.phone}
+                onChange={handleRegisterChange}
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
                 name="phone"
-                label="Phone"
+                label="Phone Number"
                 type="number"
                 id="phone"
                 autoComplete="current-phone"

@@ -8,7 +8,9 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { logoutUser } from "../../actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
 const ButtonAppBar = () => {
   const token = useSelector((state) => state.userReducer.token);
 
+  const dispatch = useDispatch();
+
   const classes = useStyles();
 
   return (
@@ -40,24 +44,20 @@ const ButtonAppBar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Hello
+            RedditPostHere
           </Typography>
           {token ? (
-            <Link
-              to="/logout"
-              style={{ textDecoration: "none", color: "white" }}
-            >
-              <Button color="inherit">Logout</Button>
+            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+              <Button onClick={() => dispatch(logoutUser())} color="inherit">
+                Logout
+              </Button>
             </Link>
           ) : (
             <>
-              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+              {/* <Link to="/" style={{ textDecoration: "none", color: "white" }}>
                 <Button color="inherit">Home</Button>
-              </Link>
-              <Link
-                to="/login"
-                style={{ textDecoration: "none", color: "white" }}
-              >
+              </Link> */}
+              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
                 <Button color="inherit">Login</Button>
               </Link>
             </>

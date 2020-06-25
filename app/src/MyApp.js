@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import "materialize-css/dist/css/materialize.min.css";
 import M from "materialize-css/dist/js/materialize.min.js";
 
@@ -15,25 +15,27 @@ import { Provider } from "react-redux";
 import { reducer } from "./components/store/reducers/reducer";
 import thunk from "redux-thunk";
 import NotFound from "./components/myComponents/NotFound";
+import Users from "./components/myComponents/Users";
 
+const store = createStore(reducer, applyMiddleware(thunk));
 
-const store = createStore( reducer, applyMiddleware( thunk ) );
-
-export default () => 
-{
-  useEffect( () => { M.AutoInit() }, [] );
+export default () => {
+  useEffect(() => {
+    M.AutoInit();
+  }, []);
 
   return (
-    <Provider store = { store } >
-      <BrowserRouter> 
+    <Provider store={store}>
+      <BrowserRouter>
         <NavigationBar />
         <Switch>
-          <Route exact path = "/" component = { LoginForm } />
-          <Route path = "/createAccount" component = { CreateAccountForm } />
-          <PrivateRoute path = "/dashboard" component = { Dashboard } />
-          <Route component = { NotFound }/>
+          <Route exact path="/" component={LoginForm} />
+          <Route path="/createAccount" component={CreateAccountForm} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/users" component={Users} />
+          <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
     </Provider>
   );
-}
+};

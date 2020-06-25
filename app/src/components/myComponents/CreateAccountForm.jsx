@@ -13,11 +13,9 @@ export default function LoginForm() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(user);
     axiosWithAuth()
       .post("/register", user)
       .then((response) => {
-        console.log(response);
         M.toast({
           html: `Account Created Successfully`,
           classes: "deep-purple darken-4",

@@ -1,13 +1,16 @@
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { axiosWithAuth } from "../../utils/axiosWithAuth"
 import User from "./User"
+import Preloader from "./Preloader"
 
 export default function Users() {
   const users = useSelector(state => state.users)
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     dispatch(dispatch => {
       axiosWithAuth()
         .get("/")
@@ -17,7 +20,10 @@ export default function Users() {
             payload: response.data,
           })
         })
-        .catch(error => console.log("ERROR FETCHING"))
+        .catch(error => {
+          console.log("ERROR FETCHING")
+        })
+        .finally(() => setLoading(false))
     })
   }, [])
 
@@ -26,11 +32,16 @@ export default function Users() {
       <div className="center myPost">
         <h2>Our Top Users</h2>
       </div>
-      <ul className="collection">
-        {users.map(user => (
-          <User key={user.id} user={user} />
-        ))}
-      </ul>
+
+      {loading ? (
+        <Preloader />
+      ) : (
+        <ul className="collection">
+          {users.map(user => (
+            <User key={user.id} user={user} />
+          ))}
+        </ul>
+      )}
     </div>
   )
 }

@@ -21,8 +21,18 @@ export default function User(props) {
             type: "DELETE_USER",
             payload: props.user.id,
           })
+
+          M.toast({
+            html: `${user.username}, was removed!`,
+            classes: "deep-purple darken-4",
+          })
         })
-        .catch(error => console.log("ERROR =>", error))
+        .catch(error =>
+          M.toast({
+            html: `Something Went Wrong!`,
+            classes: "deep-purple darken-4",
+          })
+        )
     })
   }
 
@@ -39,13 +49,21 @@ export default function User(props) {
       axiosWithAuth()
         .put(`/${user.id}`, user)
         .then(response => {
-          console.log("Response", response.data)
           dispatch({
             type: "UPDATE_USER",
             payload: user,
           })
+          M.toast({
+            html: `${user.username}, was updated!`,
+            classes: "deep-purple darken-4",
+          })
         })
-        .catch(error => console.log("ERROR FETCHING"))
+        .catch(error =>
+          M.toast({
+            html: `Something Went Wrong!`,
+            classes: "deep-purple darken-4",
+          })
+        )
     })
   }
 

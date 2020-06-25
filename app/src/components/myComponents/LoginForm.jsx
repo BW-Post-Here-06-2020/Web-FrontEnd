@@ -18,13 +18,14 @@ export default function LoginForm() {
     axiosWithAuth()
       .post("/login", user)
       .then(response => {
+        console.log(response)
         if (window.localStorage) window.localStorage.setItem("token", response.data.token)
         M.toast({
           html: `Welcome Back ${user.username}!`,
           classes: "deep-purple darken-4",
         })
         setUser({ username: "", password: "" })
-        dispatch({ type: "SIGN_IN" })
+        dispatch({ type: "SIGN_IN", payload: response.data.user })
         history.push("/dashboard")
       })
       .catch(error =>

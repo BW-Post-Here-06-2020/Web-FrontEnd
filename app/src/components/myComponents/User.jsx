@@ -47,7 +47,7 @@ export default function User(props) {
     })
     dispatch(dispatch => {
       axiosWithAuth()
-        .put(`/${user.id}`, user)
+        .put(`/${user.id}`, { username: user.username, password: "Test1", new_password: "t1", phone: 1 })
         .then(response => {
           dispatch({
             type: "UPDATE_USER",

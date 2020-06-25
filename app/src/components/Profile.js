@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -22,6 +22,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 
 import { useSelector, useDispatch } from "react-redux";
 
+import { updateUser } from "../actions/userActions";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -37,11 +39,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const initialFormValues = {
+  first_name: "",
+  last_name: "",
+  username: "",
+  password: "",
+  new_password: "",
+  phone: "",
+};
+
 const Profile = () => {
   const profile = useSelector((state) => state.userReducer.currentUser);
-  //   console.log("Profile -> profile", profile);
 
-  const [userInfo, setUserInfo] = useState(profile);
+  const dispatch = useDispatch();
+
+  const [userInfo, setUserInfo] = useState(initialFormValues);
+
+  useEffect(() => {
+    profile ? setUserInfo(profile) : setUserInfo(initialFormValues);
+  }, [profile]);
 
   const [open, setOpen] = useState(false);
 
@@ -65,6 +81,12 @@ const Profile = () => {
       ...userInfo,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const runUserUpdate = (e) => {
+    e.preventDefault();
+    dispatch(updateUser(profile.id, userInfo));
+    closeModalHandler();
   };
 
   return (
@@ -155,7 +177,7 @@ const Profile = () => {
             Username: {profile.username}
             <br></br>
             <br></br>
-            Password: {profile.password}
+            Password: **********
             <br></br>
             <br></br>
             Phone Number: {profile.phone}
@@ -180,7 +202,11 @@ const Profile = () => {
                     Edit Personal Data
                   </Typography>
 
-                  <form onSubmit={null} className={classes.form} noValidate>
+                  <form
+                    onSubmit={runUserUpdate}
+                    className={classes.form}
+                    noValidate
+                  >
                     <TextField
                       value={userInfo.first_name}
                       onChange={handleInputChange}
@@ -230,9 +256,23 @@ const Profile = () => {
                       required
                       fullWidth
                       name="password"
-                      label="Password"
+                      label="Old Password"
                       type="password"
                       id="password"
+                      autoComplete="current-password"
+                    />
+
+                    <TextField
+                      value={userInfo.new_password}
+                      onChange={handleInputChange}
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      name="new_password"
+                      label="New Password"
+                      type="password"
+                      id="new_password"
                       autoComplete="current-password"
                     />
 

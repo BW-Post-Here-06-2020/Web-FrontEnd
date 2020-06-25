@@ -15,9 +15,11 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 
+import { useHistory } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
 
-import { updateUser } from "../actions/userActions";
+import { updateUser, deleteUser, logoutUser } from "../actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,6 +46,8 @@ const initialFormValues = {
 };
 
 const Profile = () => {
+  const { push } = useHistory();
+
   const profile = useSelector((state) => state.userReducer.currentUser);
 
   const dispatch = useDispatch();
@@ -65,7 +69,7 @@ const Profile = () => {
   };
 
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -82,6 +86,12 @@ const Profile = () => {
     e.preventDefault();
     dispatch(updateUser(profile.id, userInfo));
     closeModalHandler();
+  };
+
+  const runsDeleteUser = (e) => {
+    dispatch(deleteUser(profile.id));
+    dispatch(logoutUser());
+    push("/");
   };
 
   return (
@@ -140,13 +150,12 @@ const Profile = () => {
         >
           <Typography className={classes.heading}>Advanced settings</Typography>
           <Typography className={classes.secondaryHeading}>
-            Yay, all I get is a placeholder
+            The most dangerous of settings are here
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer
-            sit amet egestas eros, vitae egestas augue. Duis vel est augue.
+            <Button onClick={() => runsDeleteUser()}>Delete Account</Button>
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>

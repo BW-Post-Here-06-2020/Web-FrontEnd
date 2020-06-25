@@ -11,6 +11,9 @@ import {
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
+  DELETE_USER_START,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAILURE,
 } from "../actions/userActions.js";
 
 export const initState = {
@@ -89,6 +92,27 @@ export const userReducer = (state = initState, action) => {
         error: "",
       };
     case UPDATE_USER_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    case DELETE_USER_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: "",
+      };
+    case DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        currentUser: "",
+        token: "",
+        userId: "",
+        isLoading: false,
+        error: "",
+      };
+    case DELETE_USER_FAILURE:
       return {
         ...state,
         isLoading: false,

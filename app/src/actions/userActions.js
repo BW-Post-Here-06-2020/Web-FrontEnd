@@ -84,3 +84,23 @@ export const updateUser = (id, User) => {
       });
   };
 };
+
+export const DELETE_USER_START = "DELETE_USER_START";
+export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
+export const DELETE_USER_FAILURE = "DELETE_USER_FAILURE";
+
+export const deleteUser = (id) => {
+  return (dispatch) => {
+    dispatch({ type: UPDATE_USER_START });
+    axiosWithAuth()
+      .delete(`/api/users/${id}`)
+      .then((res) => {
+        console.log("UpdateUser -> res", res);
+        dispatch({ type: UPDATE_USER_SUCCESS, payload: res.data });
+      })
+      .catch((err) => {
+        console.log("UpdateUser -> err", err);
+        dispatch({ type: UPDATE_USER_FAILURE, payload: err.response.data });
+      });
+  };
+};

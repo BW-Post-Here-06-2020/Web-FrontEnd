@@ -48,7 +48,7 @@ const Dashboard = () => {
       {data.length ? (
         <div>
           {data.map((item) => (
-            <div>
+            <div key={item.id}>
               <Card className={classes.root} variant="outlined">
                 <CardContent>
                   <Typography

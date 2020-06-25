@@ -1,5 +1,6 @@
 export const dummyData = [
   {
+    id: 1,
     title: "Is Fusion nullified for the Extreme Z Awakening Event?",
     post:
       "On JP I missed out on my chance to do SSJ3 Goku the first time so I'm doing it now. Been lucked out of rotations for most of these stages and I've noticed that for my Fusions team, LR Gogeta would NEVER fuse. I'm genuinely curious if the mechanic is nullified for the event or i'm just getting AWFUL RNG.",
@@ -17,6 +18,7 @@ export const dummyData = [
     ],
   },
   {
+    id: 2,
     title: "Is Fusion nullified for the Extreme Z Awakening Event?",
     post:
       "On JP I missed out on my chance to do SSJ3 Goku the first time so I'm doing it now. Been lucked out of rotations for most of these stages and I've noticed that for my Fusions team, LR Gogeta would NEVER fuse. I'm genuinely curious if the mechanic is nullified for the event or i'm just getting AWFUL RNG.",
@@ -34,6 +36,7 @@ export const dummyData = [
     ],
   },
   {
+    id: 3,
     title: "Is Fusion nullified for the Extreme Z Awakening Event?",
     post:
       "On JP I missed out on my chance to do SSJ3 Goku the first time so I'm doing it now. Been lucked out of rotations for most of these stages and I've noticed that for my Fusions team, LR Gogeta would NEVER fuse. I'm genuinely curious if the mechanic is nullified for the event or i'm just getting AWFUL RNG.",
@@ -51,6 +54,7 @@ export const dummyData = [
     ],
   },
   {
+    id: 4,
     title: "Is Fusion nullified for the Extreme Z Awakening Event?",
     post:
       "On JP I missed out on my chance to do SSJ3 Goku the first time so I'm doing it now. Been lucked out of rotations for most of these stages and I've noticed that for my Fusions team, LR Gogeta would NEVER fuse. I'm genuinely curious if the mechanic is nullified for the event or i'm just getting AWFUL RNG.",
@@ -68,6 +72,7 @@ export const dummyData = [
     ],
   },
   {
+    id: 5,
     title: "Is Fusion nullified for the Extreme Z Awakening Event?",
     post:
       "On JP I missed out on my chance to do SSJ3 Goku the first time so I'm doing it now. Been lucked out of rotations for most of these stages and I've noticed that for my Fusions team, LR Gogeta would NEVER fuse. I'm genuinely curious if the mechanic is nullified for the event or i'm just getting AWFUL RNG.",
@@ -85,6 +90,7 @@ export const dummyData = [
     ],
   },
   {
+    id: 6,
     title: "Is Fusion nullified for the Extreme Z Awakening Event?",
     post:
       "On JP I missed out on my chance to do SSJ3 Goku the first time so I'm doing it now. Been lucked out of rotations for most of these stages and I've noticed that for my Fusions team, LR Gogeta would NEVER fuse. I'm genuinely curious if the mechanic is nullified for the event or i'm just getting AWFUL RNG.",

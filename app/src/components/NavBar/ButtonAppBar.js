@@ -47,11 +47,22 @@ const ButtonAppBar = () => {
             RedditPostHere
           </Typography>
           {token ? (
-            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-              <Button onClick={() => dispatch(logoutUser())} color="inherit">
-                Logout
-              </Button>
-            </Link>
+            <>
+              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+                <Button color="inherit">Dashboard</Button>
+              </Link>
+              <Link
+                to="/profile"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <Button color="inherit">Profile</Button>
+              </Link>
+              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+                <Button onClick={() => dispatch(logoutUser())} color="inherit">
+                  Logout
+                </Button>
+              </Link>
+            </>
           ) : (
             <>
               {/* <Link to="/" style={{ textDecoration: "none", color: "white" }}>

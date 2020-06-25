@@ -10,7 +10,6 @@ export const getData = () => (dispatch) => {
     axiosWithAuth()
       .get("")
       .then((res) => {
-        console.log("getData -> res", res);
         dispatch({ type: UPDATE_DATA, payload: res.data });
       })
       .catch((err) => {

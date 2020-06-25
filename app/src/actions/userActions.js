@@ -1,13 +1,8 @@
 import axios from "axios";
 import jwt from "jsonwebtoken";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { useHistory } from "react-router-dom";
 
 const URL = "https://api04.herokuapp.com";
-
-export const FETCH_USER_START = "FETCH_USER_START";
-export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
-export const FETCH_USER_FAILURE = "FETCH_USER_FAILURE";
 
 export const LOGIN_USER_START = "LOGIN_USER_START";
 export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS";

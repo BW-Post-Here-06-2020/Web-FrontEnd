@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { loginUser, registerUser } from "../actions/userActions";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -14,11 +16,9 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -53,68 +53,69 @@ const Copyright = () => {
   );
 };
 
-const initialFormValues = {
-  credentials: {
-    username: "",
-    password: "",
-  },
+const initialLoginValues = {
+  username: "",
+  password: "",
 };
 
-const initialCreateAccountFormValues = {
-  credentials: 
-  {
-    username : "",
-    password : "",
-  }
+const initialRegisterValues = {
+  first_name: "",
+  last_name: "",
+  username: "",
+  password: "",
+  phone: "",
 };
-
 
 const Login = () => {
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [ createAccountValues, setCreateAccountValue ] = useState( initialCreateAccountFormValues );
-
+  const dispatch = useDispatch();
   const { push } = useHistory();
+
+  const [loginValues, setLoginValues] = useState(initialLoginValues);
+
+  const [registerValues, setRegisterValues] = useState(initialRegisterValues);
+
   const classes = useStyles();
 
-  const [ open, setOpen ] = React.useState( false );
+  const [open, setOpen] = useState(false);
 
-  const openModalHandler = () => { setOpen( true ) };
-  
-  const closeModalHandler = () => { setOpen( false ) };
-
-  const handleChange = ( event ) => {
-    setFormValues( { ...formValues, [event.target.name]: event.target.value } );
+  const openModalHandler = () => {
+    setOpen(true);
   };
 
-  const createAccountOnChange = e => { setCreateAccountValue( { ...createAccountValues, [ e.target.name ] : e.target.value } ) };
-  
-
-  const login = ( event ) => {
-    event.preventDefault();
-    axiosWithAuth()
-      .post( "api/login" , formValues.credentials )
-      .then( ( res )  => {
-        console.log("Login -> res", res);
-        window.localStorage.setItem( "token", res.data.payload );
-        push( "/PostHere" );
-      })
-      .catch( ( err ) => console.log( err ) );
+  const closeModalHandler = () => {
+    setOpen(false);
   };
 
-  const createAccount = e => 
-  {
+  const handleLoginChange = (event) => {
+    setLoginValues({ ...loginValues, [event.target.name]: event.target.value });
+  };
+
+  const handleRegisterChange = (event) => {
+    setRegisterValues({
+      ...registerValues,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const login = (e) => {
     e.preventDefault();
-    axiosWithAuth()
-      .post( "api/create" , createAccountValues.credentials )
-      .then( ( res )  => {
-        console.log("Login -> res", res);
-        window.localStorage.setItem( "token", res.data.payload );
-        push( "/PostHere" );
-      })
-      .catch( ( err ) => console.log( err ) );
+    dispatch(loginUser(loginValues));
+    setLoginValues(initialLoginValues);
+    push("/");
   };
 
-
+  const createAccount = (e) => {
+    e.preventDefault();
+    dispatch(registerUser(registerValues));
+    dispatch(
+      loginUser({
+        username: registerValues.username,
+        password: registerValues.password,
+      })
+    );
+    closeModalHandler();
+    setRegisterValues(initialRegisterValues);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -124,13 +125,25 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form onSubmit = { login } className = { classes.form } noValidate>
-          <TextField value = { formValues.username } onChange = { handleChange } type = "text" variant = "outlined" fullWidth
-            margin = "normal" required id = "username" label = "Username" name = "username" autoComplete = "username" autoFocus />
+        <form onSubmit={login} className={classes.form} noValidate>
+          <TextField
+            value={loginValues.username}
+            onChange={handleLoginChange}
+            type="text"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            required
+            id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
+            autoFocus
+          />
 
           <TextField
-            value={formValues.password}
-            onChange={handleChange}
+            value={loginValues.password}
+            onChange={handleLoginChange}
             variant="outlined"
             margin="normal"
             required
@@ -161,51 +174,124 @@ const Login = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2" onClick = { openModalHandler }>
+              <Link href="#" variant="body2" onClick={openModalHandler}>
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>
         </form>
 
-
-        <Dialog open = { open } onClose={ closeModalHandler } aria-labelledby = "alert-dialog-title" aria-describedby = "alert-dialog-description">
+        <Dialog
+          open={open}
+          onClose={closeModalHandler}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
           <DialogContent>
-          
             <Avatar className={classes.avatar}></Avatar>
-              <Typography component="h1" variant="h5"> Create Account</Typography>
-                  
-            <form onSubmit = { createAccount } className = { classes.form } noValidate>
-              
-              <TextField value = { createAccountValues.username } onChange = { createAccountOnChange } type = "text" variant = "outlined"
-                margin = "normal" required fullWidth id = "username" label = "Username" name = "username" autoComplete = "username" autoFocus />
+            <Typography component="h1" variant="h5">
+              {" "}
+              Create Account
+            </Typography>
 
-              <TextField value={ createAccountValues.password } onChange={ createAccountOnChange } variant = "outlined" margin = "normal" required 
-                fullWidth name = "password" label = "Password" type = "password" id = "password" autoComplete = "current-password" />
+            <form onSubmit={createAccount} className={classes.form} noValidate>
+              <TextField
+                value={registerValues.first_name}
+                onChange={handleRegisterChange}
+                type="text"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="first_name"
+                label="First Name"
+                name="first_name"
+                autoComplete="first_name"
+                autoFocus
+              />
+              <TextField
+                value={registerValues.last_name}
+                onChange={handleRegisterChange}
+                type="text"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="last_name"
+                label="Last Name"
+                name="last_name"
+                autoComplete="last_name"
+              />
+              <TextField
+                value={registerValues.username}
+                onChange={handleRegisterChange}
+                type="text"
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+              />
 
-              <FormControlLabel control = { <Checkbox value = "remember" color="primary" /> } label="Remember me" />
+              <TextField
+                value={registerValues.password}
+                onChange={handleRegisterChange}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
 
-              <Button type = "submit" fullWidth variant = "contained" color = "primary" className = { classes.submit } >
+              <TextField
+                value={registerValues.phone}
+                onChange={handleRegisterChange}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="phone"
+                label="Phone Number"
+                type="number"
+                id="phone"
+                autoComplete="current-phone"
+              />
+
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
                 Sign Up
               </Button>
-
             </form>
-        
           </DialogContent>
 
           <DialogActions>
-            <Button onClick={ closeModalHandler } color="primary"> Cancel </Button>
+            <Button onClick={closeModalHandler} color="primary">
+              {" "}
+              Cancel{" "}
+            </Button>
           </DialogActions>
         </Dialog>
-
       </div>
       <Box mt={8}>
         <Copyright />
       </Box>
-
-     
-
-
     </Container>
   );
 };

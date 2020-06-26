@@ -108,8 +108,8 @@ const Dashboard = () => {
       <br></br>
       {postData.length ? (
         <div>
-          {postData.map((item) => (
-            <div key={item.id}>
+          {postData.map((item, i) => (
+            <div key={i}>
               <Card className={classes.root} variant="outlined">
                 <CardContent>
                   <Typography variant="h5" component="h2">
@@ -120,8 +120,8 @@ const Dashboard = () => {
                     {item.body}
                   </Typography>
                   <br></br>
-                  {item.prediction.map((item) => (
-                    <div>
+                  {item.prediction.map((item, i) => (
+                    <div key={i}>
                       <Typography
                         className={classes.title}
                         color="textSecondary"

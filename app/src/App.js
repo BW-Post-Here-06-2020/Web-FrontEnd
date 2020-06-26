@@ -6,6 +6,11 @@ import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./components/Dashboard";
 import ButtonAppBar from "./components/NavBar/ButtonAppBar";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
+
+const Container = styled.div`
+  width: 100%;
+`;
 
 function App() {
   const token = useSelector((state) => state.userReducer.token);
@@ -13,7 +18,7 @@ function App() {
   console.log("App -> token", token);
 
   return (
-    <div>
+    <Container>
       <ButtonAppBar />
       <Switch>
         {token ? (
@@ -25,7 +30,7 @@ function App() {
           <Route exact path="/" component={Login} />
         )}
       </Switch>
-    </div>
+    </Container>
   );
 }
 

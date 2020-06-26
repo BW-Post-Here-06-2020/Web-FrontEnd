@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { dummyData as data } from "./DummyData";
 
@@ -14,9 +14,20 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
+import LinearProgress from "@material-ui/core/LinearProgress";
+
+const loadingStyle = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    textAlign: "center",
     minWidth: 275,
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
@@ -39,7 +50,10 @@ const initialFormValues = {
 const Dashboard = () => {
   const classes = useStyles();
 
+  const loadingClasses = loadingStyle();
+
   const dispatch = useDispatch();
+  const { isLoading, dataArray } = useSelector((state) => state.postReducer);
 
   const [formValues, setFormValues] = useState(initialFormValues);
 
@@ -84,40 +98,59 @@ const Dashboard = () => {
           </Button>
         </div>
       </form>
+      {isLoading ? (
+        <div className={loadingClasses.root}>
+          <br></br>
+          <LinearProgress />
+        </div>
+      ) : (
+        <></>
+      )}
       <br></br>
-      {data.length ? (
+      {dataArray.length ? (
         <div>
-          {data.map((item) => (
+          {dataArray.map((item) => (
             <div key={item.id}>
               <Card className={classes.root} variant="outlined">
                 <CardContent>
-                  <Typography
-                    className={classes.title}
-                    color="textSecondary"
-                    gutterBottom
-                  >
-                    User Name Goes Here
-                  </Typography>
                   <Typography variant="h5" component="h2">
                     {item.title}
                   </Typography>
-                  {/* <Typography className={classes.pos} color="textSecondary">
-                    adjective
-                  </Typography> */}
                   <p></p>
                   <Typography variant="body2" component="p">
                     {item.post}
                   </Typography>
+                  <br></br>
+                  {item.prediction.map((item) => (
+                    <div>
+                      <Typography
+                        className={classes.title}
+                        color="textSecondary"
+                        gutterBottom
+                      >
+                        {item}
+                      </Typography>
+                    </div>
+                  ))}
                 </CardContent>
                 <CardActions>
-                  <Button size="small">Remove From Favorites</Button>
+                  <Button size="small">Add To Favorites</Button>
                 </CardActions>
               </Card>
             </div>
           ))}
         </div>
       ) : (
-        <p>There is nothing to display</p>
+        <div className={classes.root}>
+          <br></br>
+          <Typography
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          >
+            Please submit a post to recieve a recommendation.
+          </Typography>
+        </div>
       )}
     </div>
   );

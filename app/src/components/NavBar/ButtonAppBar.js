@@ -15,6 +15,7 @@ import { logoutUser } from "../../actions/userActions";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    width: "100%",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -65,9 +66,6 @@ const ButtonAppBar = () => {
             </>
           ) : (
             <>
-              {/* <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-                <Button color="inherit">Home</Button>
-              </Link> */}
               <Link to="/" style={{ textDecoration: "none", color: "white" }}>
                 <Button color="inherit">Login</Button>
               </Link>

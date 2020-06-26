@@ -8,7 +8,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import Dialog from "@material-ui/core/Dialog";
@@ -95,228 +94,233 @@ const Profile = () => {
   };
 
   return (
-    <div className={classes.root}>
-      <ExpansionPanel
-        expanded={expanded === "panel1"}
-        onChange={handleChange("panel1")}
-      >
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
+    <div>
+      <div className={classes.root}>
+        <ExpansionPanel
+          expanded={expanded === "panel1"}
+          onChange={handleChange("panel1")}
         >
-          <Typography className={classes.heading}>General settings</Typography>
-          <Typography className={classes.secondaryHeading}>
-            I am an expansion panel
-          </Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-            Aliquam eget maximus est, id dignissim quam.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel
-        expanded={expanded === "panel2"}
-        onChange={handleChange("panel2")}
-      >
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1bh-content"
+            id="panel1bh-header"
+          >
+            <Typography className={classes.heading}>
+              General settings
+            </Typography>
+            <Typography className={classes.secondaryHeading}>
+              I am an expansion panel
+            </Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Typography>
+              Nulla facilisi. Phasellus sollicitudin nulla et quam mattis
+              feugiat. Aliquam eget maximus est, id dignissim quam.
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+        <ExpansionPanel
+          expanded={expanded === "panel2"}
+          onChange={handleChange("panel2")}
         >
-          <Typography className={classes.heading}>User</Typography>
-          <Typography className={classes.secondaryHeading}>
-            You are currently logged in
-          </Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Donec placerat, lectus sed mattis semper, neque lectus feugiat
-            lectus, varius pulvinar diam eros in elit. Pellentesque convallis
-            laoreet laoreet.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel
-        expanded={expanded === "panel3"}
-        onChange={handleChange("panel3")}
-      >
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3bh-content"
-          id="panel3bh-header"
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2bh-content"
+            id="panel2bh-header"
+          >
+            <Typography className={classes.heading}>User</Typography>
+            <Typography className={classes.secondaryHeading}>
+              You are currently logged in
+            </Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Typography>
+              Donec placerat, lectus sed mattis semper, neque lectus feugiat
+              lectus, varius pulvinar diam eros in elit. Pellentesque convallis
+              laoreet laoreet.
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+        <ExpansionPanel
+          expanded={expanded === "panel3"}
+          onChange={handleChange("panel3")}
         >
-          <Typography className={classes.heading}>Advanced settings</Typography>
-          <Typography className={classes.secondaryHeading}>
-            The most dangerous of settings are here
-          </Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            <Button onClick={() => runsDeleteUser()}>Delete Account</Button>
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel
-        expanded={expanded === "panel4"}
-        onChange={handleChange("panel4")}
-      >
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel4bh-content"
-          id="panel4bh-header"
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel3bh-content"
+            id="panel3bh-header"
+          >
+            <Typography className={classes.heading}>
+              Advanced settings
+            </Typography>
+            <Typography className={classes.secondaryHeading}>
+              The most dangerous of settings are here
+            </Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Typography>
+              <Button onClick={() => runsDeleteUser()}>Delete Account</Button>
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+        <ExpansionPanel
+          expanded={expanded === "panel4"}
+          onChange={handleChange("panel4")}
         >
-          <Typography className={classes.heading}>Personal data</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            First Name: {profile.first_name}
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel4bh-content"
+            id="panel4bh-header"
+          >
+            <Typography className={classes.heading}>Personal data</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Typography>
+              First Name: {profile.first_name}
+              <br></br>
+              <br></br>
+              Last Name: {profile.last_name}
+              <br></br>
+              <br></br>
+              Username: {profile.username}
+              <br></br>
+              <br></br>
+              Password: **********
+              <br></br>
+              <br></br>
+              Phone Number: {profile.phone}
+              <br></br>
+              <br></br>
+              <Button onClick={openModalHandler}>Edit</Button>
+            </Typography>
             <br></br>
-            <br></br>
-            Last Name: {profile.last_name}
-            <br></br>
-            <br></br>
-            Username: {profile.username}
-            <br></br>
-            <br></br>
-            Password: **********
-            <br></br>
-            <br></br>
-            Phone Number: {profile.phone}
-            <br></br>
-            <br></br>
-            <Button onClick={openModalHandler}>Edit</Button>
-          </Typography>
-          <br></br>
-          <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-              <Dialog
-                open={open}
-                onClose={closeModalHandler}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-              >
-                <DialogContent>
-                  <Avatar className={classes.avatar}></Avatar>
-                  <Typography component="h1" variant="h5">
-                    {" "}
-                    Edit Personal Data
-                  </Typography>
+            <Container fixedcomponent="main" maxWidth="xs">
+              <div className={classes.paper}>
+                <Dialog
+                  open={open}
+                  onClose={closeModalHandler}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogContent>
+                    <Avatar className={classes.avatar}></Avatar>
+                    <Typography component="h1" variant="h5">
+                      {" "}
+                      Edit Personal Data
+                    </Typography>
 
-                  <form
-                    onSubmit={runUserUpdate}
-                    className={classes.form}
-                    noValidate
-                  >
-                    <TextField
-                      value={userInfo.first_name}
-                      onChange={handleInputChange}
-                      type="text"
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="first_name"
-                      label="First Name"
-                      name="first_name"
-                      autoComplete="first_name"
-                      autoFocus
-                    />
-                    <TextField
-                      value={userInfo.last_name}
-                      onChange={handleInputChange}
-                      type="text"
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="last_name"
-                      label="Last Name"
-                      name="last_name"
-                      autoComplete="last_name"
-                    />
-                    <TextField
-                      value={userInfo.username}
-                      onChange={handleInputChange}
-                      type="text"
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="username"
-                      label="Username"
-                      name="username"
-                      autoComplete="username"
-                    />
-
-                    <TextField
-                      value={userInfo.password}
-                      onChange={handleInputChange}
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="password"
-                      label="Old Password"
-                      type="password"
-                      id="password"
-                      autoComplete="current-password"
-                    />
-
-                    <TextField
-                      value={userInfo.new_password}
-                      onChange={handleInputChange}
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="new_password"
-                      label="New Password"
-                      type="password"
-                      id="new_password"
-                      autoComplete="current-password"
-                    />
-
-                    <TextField
-                      value={userInfo.phone}
-                      onChange={handleInputChange}
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="phone"
-                      label="Phone Number"
-                      type="number"
-                      id="phone"
-                      autoComplete="current-phone"
-                    />
-
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      className={classes.submit}
+                    <form
+                      onSubmit={runUserUpdate}
+                      className={classes.form}
+                      noValidate
                     >
-                      Submit
-                    </Button>
-                  </form>
-                </DialogContent>
+                      <TextField
+                        value={userInfo.first_name}
+                        onChange={handleInputChange}
+                        type="text"
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="first_name"
+                        label="First Name"
+                        name="first_name"
+                        autoComplete="first_name"
+                        autoFocus
+                      />
+                      <TextField
+                        value={userInfo.last_name}
+                        onChange={handleInputChange}
+                        type="text"
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="last_name"
+                        label="Last Name"
+                        name="last_name"
+                        autoComplete="last_name"
+                      />
+                      <TextField
+                        value={userInfo.username}
+                        onChange={handleInputChange}
+                        type="text"
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="username"
+                        label="Username"
+                        name="username"
+                        autoComplete="username"
+                      />
 
-                <DialogActions>
-                  <Button onClick={closeModalHandler} color="primary">
-                    {" "}
-                    Cancel{" "}
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </div>
-          </Container>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+                      <TextField
+                        value={userInfo.password}
+                        onChange={handleInputChange}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Old Password"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                      />
+
+                      <TextField
+                        value={userInfo.new_password}
+                        onChange={handleInputChange}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="new_password"
+                        label="New Password"
+                        type="password"
+                        id="new_password"
+                        autoComplete="current-password"
+                      />
+
+                      <TextField
+                        value={userInfo.phone}
+                        onChange={handleInputChange}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="phone"
+                        label="Phone Number"
+                        type="number"
+                        id="phone"
+                        autoComplete="current-phone"
+                      />
+
+                      <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                      >
+                        Submit
+                      </Button>
+                    </form>
+                  </DialogContent>
+
+                  <DialogActions>
+                    <Button onClick={closeModalHandler} color="primary">
+                      {" "}
+                      Cancel{" "}
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+              </div>
+            </Container>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+      </div>
     </div>
   );
 };

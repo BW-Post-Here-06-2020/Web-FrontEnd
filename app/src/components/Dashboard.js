@@ -53,7 +53,7 @@ const Dashboard = () => {
   const loadingClasses = loadingStyle();
 
   const dispatch = useDispatch();
-  const { isLoading, dataArray } = useSelector((state) => state.postReducer);
+  const { isLoading, postData } = useSelector((state) => state.postReducer);
 
   const [formValues, setFormValues] = useState(initialFormValues);
 
@@ -106,9 +106,9 @@ const Dashboard = () => {
         <></>
       )}
       <br></br>
-      {dataArray.length ? (
+      {postData.length ? (
         <div>
-          {dataArray.map((item) => (
+          {postData.map((item) => (
             <div key={item.id}>
               <Card className={classes.root} variant="outlined">
                 <CardContent>
@@ -117,7 +117,7 @@ const Dashboard = () => {
                   </Typography>
                   <p></p>
                   <Typography variant="body2" component="p">
-                    {item.post}
+                    {item.body}
                   </Typography>
                   <br></br>
                   {item.prediction.map((item) => (

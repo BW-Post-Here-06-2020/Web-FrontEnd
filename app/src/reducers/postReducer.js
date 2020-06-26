@@ -12,7 +12,7 @@ const initialState = {
   isFetchingData: false,
   isLoading: false,
   error: "",
-  postData: "",
+  postData: [],
 };
 
 export const postReducer = (state = initialState, action) => {
@@ -43,7 +43,7 @@ export const postReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        postData: action.payload,
+        postData: [action.payload],
       };
     case GET_RECOMMENDATION_FAILURE:
       return {

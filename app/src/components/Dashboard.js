@@ -57,9 +57,10 @@ const Dashboard = () => {
 
   const [formValues, setFormValues] = useState(initialFormValues);
 
-  // useEffect(() => {
-  //   dispatch(getData());
-  // }, []);
+  const handleSubmit = () => {
+    dispatch(getRecommendation(formValues));
+    setFormValues(initialFormValues);
+  };
 
   const handleChange = (event) => {
     setFormValues({
@@ -93,9 +94,7 @@ const Dashboard = () => {
           />
           <br></br>
           <br></br>
-          <Button onClick={() => dispatch(getRecommendation(formValues))}>
-            Get Recommendation
-          </Button>
+          <Button onClick={handleSubmit}>Get Recommendation</Button>
         </div>
       </form>
       {isLoading ? (
